@@ -8,7 +8,8 @@ from datetime import timedelta
 
 # parameterizing the etl_web_to_gcs flow
 
-@task(retries=3, cache_key_fn=task_input_hash, cache_expiration=timedelta(days=1))
+# @task(retries=3, cache_key_fn=task_input_hash, cache_expiration=timedelta(days=1)) <-- example of how to use a cache, commenting out because old local cache is messing w/ docker
+@task(retries=3)
 def fetch(dataset_url: str) -> pd.DataFrame: # using type hints — takes a string, returns a df
     """Read taxi data from web into pandas DataFrame"""
     # retries example #
